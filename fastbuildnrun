@@ -1,0 +1,9 @@
+#g++ -c Color.cpp -o Color.o
+#g++ -c Matrix.cpp -o Matrix.o
+#g++ -c MatrixGenerator.cpp -o MatrixGenerator.o
+g++ -c ColorMatrix.cpp -o ColorMatrix.o
+#g++ -c Solver.cpp -o Solver.o
+#g++ -c IOcolorMatrix.cpp -o IOcolorMatrix.o
+g++ -c main.cpp -o main.o
+g++ Color.o Matrix.o ColorMatrix.o MatrixGenerator.o Solver.o IOcolorMatrix.o main.o -o main
+./main $1 $2 $3 $4 $5 $6
