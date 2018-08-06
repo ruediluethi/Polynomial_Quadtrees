@@ -86,5 +86,14 @@ Einige Beispiele und deren Parameter zum Ausführen:
 - Quadtrees only:
   ./main input/sonnenuntergang.bmp output/sonnenuntergang.bmp 0.2 -1 256 4
 
-- Ein quadratisches Blätterdach:
+- Ein parabolisches Blätterdach:
   ./main input/baum.bmp output/baum.bmp
+
+- Nur mit Geraden:
+  ./main input/pamplona.bmp output/pamplona.bmp 0.4 1 128 8
+
+
+
+
+REPOSITORY LINK
+https://github.com/ruediluethi/Polynomial_Quadtrees
