@@ -41,9 +41,9 @@ Matrix<T> operator+ (Matrix<T>, Matrix<T>);
 
 // difference
 template <class T>
-Matrix<T>& operator+= (Matrix<T>&, Matrix<T>);
+Matrix<T>& operator-= (Matrix<T>&, Matrix<T>);
 template <class T>
-Matrix<T> operator+ (Matrix<T>, Matrix<T>);
+Matrix<T> operator- (Matrix<T>, Matrix<T>);
 
 // multiplication with scalar
 template <class T>

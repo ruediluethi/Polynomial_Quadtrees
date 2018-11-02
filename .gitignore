@@ -2,6 +2,9 @@
 .DS_Store
 Thumbs.db
 
+# output stuff
+animation_out/*
+
 # Prerequisites
 *.d
 

@@ -16,7 +16,10 @@ public:
 	Matrix<double> distance(ColorMatrix);
 
 	ColorMatrix generateQuadtree(double,int,int,int);
-	ColorMatrix polynomialSplit(int);
+	Matrix<double> split();
+	Matrix<double> split(bool);
+	ColorMatrix polynomialApprox(Matrix<double>,int,bool);
+	ColorMatrix diffuse(double);
 
 private:
 	

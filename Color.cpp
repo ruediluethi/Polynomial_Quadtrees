@@ -48,6 +48,7 @@ double Color::distance(const Color& other)
 	double db = rgbThis[2] - rgbOther[2];
 
 	return sqrt(2*dr*dr + 4*dg*dg + 3*db*db); // source: https://en.wikipedia.org/wiki/Color_difference
+	// return 2*dr*dr + 4*dg*dg + 3*db*db;
 }
 
 std::ostream& operator<< (std::ostream& out, Color one)

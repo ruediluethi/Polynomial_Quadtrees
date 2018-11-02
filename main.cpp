@@ -2,6 +2,7 @@
 #include <time.h>
 #include <cmath>
 #include <float.h>
+#include <sstream>
 
 #include "Color.h"
 #include "Matrix.h"
@@ -9,6 +10,7 @@
 #include "ColorMatrix.h"
 #include "MatrixGenerator.h"
 #include "IOcolorMatrix.h"
+#include "Solver.h"
 
 
 Matrix<double> calcColorDistance(Matrix<Color> A, Matrix<Color> B)
@@ -77,8 +79,78 @@ int main(int argc, char* argv[])
 	// start the process
 	ColorMatrix quadTreeImg = sourceImg.generateQuadtree(levelOfDetails, maxSize, minSize, zeros);
 
-	// write to file
+	// write to disk
 	IOcolorMatrix::writeToFile(quadTreeImg, outputPath);
+
+
+	// for polynomial interpolate animation
+	/*
+	Matrix<double> split = sourceImg.split(false);
+	std::cout << std::endl;
+
+	ColorMatrix debugImg = sourceImg.polynomialApprox(split,2,false);
+
+	ColorMatrix debugImg(Matrix<Color>(sourceImg.getDimension()[0],sourceImg.getDimension()[1],Color(0,0,0)));
+	for (int j = 0; j < sourceImg.getDimension()[1]; j++){
+		for (int i = 0; i < (int)round(split.getElement(j,0)); i++){
+			debugImg.setElement(i,j,Color(1,1,1));
+		}
+	}
+
+	IOcolorMatrix::writeToFile(debugImg, "output/test_row.bmp");
+
+	// for (int i = 0; i < 3; i++){
+	// 	debug = debug.diffuse(0.1);
+	// }
+
+	// write to file
+	std::ostringstream debugFile;
+	debugFile << "split.bmp";
+	std::string debugString = outputPath + debugFile.str();
+	char* debugChars = new char[debugString.length()];
+	strcpy(debugChars, debugString.c_str());
+	std::cout << "write: [" << debugChars << "]" << std::endl;
+	IOcolorMatrix::writeToFile(debugImg, debugChars);
+
+	int fileCount = 0;
+	for (int p = 0; p < 20; p++){
+		
+		std::cout << std::endl << "p = " << p;
+		Matrix<double> polyA = Solver::polynomialApprox(split, p);
+		Matrix<double> polyB = Solver::polynomialApprox(split, p+1);
+		std::cout << std::endl;
+		
+		int interpolateLength = 12;
+		for (int t = 0; t < interpolateLength; t++){
+			Matrix<double> inbetween = Solver::interpolate(polyA, polyB, (double)t/(double)interpolateLength);
+
+			// ColorMatrix splittedImg(Matrix<Color>(sourceImg.getDimension()[0],sourceImg.getDimension()[1],Color(1,1,1)));
+			ColorMatrix splittedImg(Matrix<Color>(sourceImg.getDimension()[0],sourceImg.getDimension()[1],Color(87.0/256.0,96.0/256.,58.0/256.0)));
+			for (int i = 0; i < sourceImg.getDimension()[0]; i++){
+				for (int j = 0; j < sourceImg.getDimension()[1]; j++){
+					if (i < (int)round(inbetween.getElement(j,0))){
+						splittedImg.setElement(i,j,Color(1,1,1));
+					}
+				}
+			}
+
+			// for (int i = 0; i < 3; i++){
+			// 	splittedImg = splittedImg.diffuse(0.1);
+			// }
+
+			// save frame
+			fileCount++;
+			std::ostringstream fileString;
+			fileString << fileCount;
+			std::string outputString = outputPath + fileString.str() + ".bmp";
+			char* outputChars = new char[outputString.length()];
+			strcpy(outputChars, outputString.c_str());
+			std::cout << "write: [" << outputChars << "]" << std::endl;
+			IOcolorMatrix::writeToFile(splittedImg, outputChars);
+		}
+	}
+	*/
+
 
 	return 0;
 

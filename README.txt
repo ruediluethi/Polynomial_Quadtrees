@@ -29,7 +29,7 @@ fastbuildnrun
 Hatte ich zum Entwickeln benutzt (will ja nicht immer alles kompilieren müssen)
 
 fullbuild
-Kompiliert und Link alle Files
+Kompiliert und linkt alle Files
 
 IOcolorMatrix.cpp / IOcolorMatrix.h
 Zwei Hilfsfunktionen welche ein .bmp direkt als Matrix<Color> lesen und schreiben.
@@ -90,7 +90,12 @@ Einige Beispiele und deren Parameter zum Ausführen:
   ./main input/baum.bmp output/baum.bmp
 
 - Nur mit Geraden:
-  ./main input/pamplona.bmp output/pamplona.bmp 0.4 1 128 8
+  ./main input/pamplona.bmp output/pamplona.bmp 0.4 1 64 8
+
+- Polynom 3ten Grades:
+  ./main input/ulm.bmp output/ulm.bmp 0.2 3 128 16
+
+
 
 
 
